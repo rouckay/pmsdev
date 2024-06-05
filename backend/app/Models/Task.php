@@ -28,8 +28,21 @@ class Task extends Model
         return $this->belongsTo(Projects::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     public function userAgent(): BelongsTo
     {
-        return $this->belongsTo(User::class, );
+        return $this->belongsTo(User::class);
     }
+    public function update_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function assigned_to(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

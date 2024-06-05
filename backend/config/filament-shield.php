@@ -16,6 +16,11 @@ return [
     'auth_provider_model' => [
         'fqcn' => 'App\\Models\\User',
     ],
+    'roles' => [
+        'super_admin',
+        'panel_user',
+        'project_manager', // Add this line
+    ],
 
     'super_admin' => [
         'enabled' => true,

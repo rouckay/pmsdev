@@ -43,41 +43,41 @@ class TaskResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('assigned_to')
                     ->label('Assigned To')
-                    ->relationship('userAgent', 'name')
+                    ->relationship('assigned_to', 'name')
                     ->required(),
                 Forms\Components\Select::make('user_id')
                     ->required()
                     ->default(auth()->id())
                     ->label('Created By')
                     ->disabled()
-                    ->relationship('userAgent', 'name'),
+                    ->relationship('user', 'name'),
                 Forms\Components\Select::make('update_by')
                     ->required()
                     ->default(auth()->id())
                     ->label('Update By')
                     ->disabled()
-                    ->relationship('userAgent', 'name'),
-                Forms\Components\Select::make('project_id')
-                    ->relationship('project', 'name')
-                    ->required(),
+                    ->relationship('update_by', 'name'),
                 Forms\Components\Select::make('project_id')
                     ->required()
                     ->relationship('project', 'name')
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\RichEditor::make('description')
                             ->columnSpanFull(),
                         Forms\Components\DateTimePicker::make('due_date'),
                         Forms\Components\Toggle::make('status')
                             ->required(),
                         Forms\Components\FileUpload::make('image_path')
                             ->image(),
+                        Forms\Components\TextInput::make('progress')
+                            ->maxLength(191),
                         Forms\Components\Select::make('created_by')
                             ->required()
                             ->default(auth()->id())
                             ->disabled()
-                            ->relationship('created_by', 'name'),
+                            ->relationship('users', 'name'),
                     ]),
             ]);
     }
