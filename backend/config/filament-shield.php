@@ -33,10 +33,10 @@ return [
         'enabled' => true,
         'name' => 'panel_user',
     ],
-    // 'Project_Manager' => [
-    //     'enabled' => true,
-    //     'name' => 'Project_Manager',
-    // ],
+    'Project_Manager' => [
+        'enabled' => true,
+        'name' => 'panel_user',
+    ],
 
     'permission_prefixes' => [
         'resource' => [

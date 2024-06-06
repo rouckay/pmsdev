@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class TaskResource extends Resource
 {
@@ -57,6 +58,7 @@ class TaskResource extends Resource
                     ->label('Update By')
                     ->disabled()
                     ->relationship('update_by', 'name'),
+
                 Forms\Components\Select::make('project_id')
                     ->required()
                     ->relationship('project', 'name')
@@ -84,7 +86,13 @@ class TaskResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $user = Auth::user(); // Get the authenticated user
+        $userId = $user->id; // Assuming 'id' is the user ID field in your user model
+
         return $table
+            ->modifyQueryUsing(function (Builder $query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -94,6 +102,7 @@ class TaskResource extends Resource
                 Tables\Columns\TextColumn::make('priority')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image_path'),
+
                 Tables\Columns\IconColumn::make('status')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('assigned_to')

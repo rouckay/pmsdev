@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->string('priority');
             $table->string('image_path')->nullable();
             $table->boolean('status');
-            $table->foreignId('assigned_to')->constrained("users");
-            $table->foreignId('user_id')->constrained("users");
-            $table->foreignId('update_by')->constrained("users");
-            $table->foreignId('project_id')->constrained("projects");
+            $table->foreignId('assigned_to')->constrained("users")->nullable();
+            $table->foreignId('user_id')->constrained("users")->nullable();
+            $table->foreignId('update_by')->constrained("users")->nullable();
+            $table->foreignId('project_id')->constrained("projects")->nullable();
             $table->timestamps();
         });
     }
