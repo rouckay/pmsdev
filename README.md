@@ -2,7 +2,7 @@ I'd be glad to create a comprehensive README file for your GitHub repository tha
 
 **Title & Badge**
 
-- **[Project Name]: A Laravel & React Full-Stack Application**
+- **PMS : A Laravel & React Full-Stack Application**
 - Optionally, include a badge for the Laravel version or a CI/CD status badge (if applicable).
 
 **Description**
@@ -64,7 +64,7 @@ I'd be glad to create a comprehensive README file for your GitHub repository tha
 **Example README Structure:**
 
 ```markdown
-# [Project Name]: A Laravel & React Full-Stack Application
+# PMS : A Laravel & React Full-Stack Application
 
 [Badge](https://img.shields.io/badge/Laravel-8-orange.svg)
 
@@ -84,13 +84,13 @@ I'd be glad to create a comprehensive README file for your GitHub repository tha
 1. Clone the repository:
 
 ```bash
-git clone [invalid URL removed][project-name].git
+git clone https://github.com/rouckay/pmsdev.git
 ```
 
 2. Install dependencies:
 
 ```bash
-cd [project-name]
+cd pmsdev
 composer install
 npm install
 ```
