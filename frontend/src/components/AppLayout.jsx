@@ -11,7 +11,7 @@ const AppLayout = () => {
       <div className="col-start-2">
         <Header />
       </div>
-      <main className="col-start-2 row-start-2 bg-red-400 py-8 px-4">
+      <main className="col-start-2 row-start-2 bg-slate-50 py-8 px-4">
         <Outlet />
       </main>
     </div>
