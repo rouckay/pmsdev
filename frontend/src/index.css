@@ -8,6 +8,6 @@
   }
 
   .button {
-    @apply bg-blue-600 hover:bg-blue-700 active:transition-all active:translate-y-[2px]  p-2 rounded-lg text-white;
+    @apply bg-blue-600 hover:bg-blue-700  p-2 rounded-lg text-white;
   }
 }

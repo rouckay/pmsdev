@@ -7,6 +7,8 @@ import Messages from "./pages/Messages";
 import Login from "./pages/Login";
 import AppLayout from "./components/AppLayout";
 
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <>
@@ -24,6 +26,26 @@ function App() {
           <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{
+          margin: "9px",
+        }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+          },
+        }}
+      />
     </>
   );
 }

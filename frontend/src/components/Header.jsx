@@ -2,7 +2,7 @@ import { HiArrowRightOnRectangle, HiOutlineUser } from "react-icons/hi2";
 
 const Header = () => {
   return (
-    <header className="bg-white-100 px-4 py-8 border-b-4 border-gray-100 w-full">
+    <header className="bg-white-100 px-4 py-8 border-b-2 border-gray-100 w-full">
       <div>
         <ul className="flex gap-6 justify-end">
           <li className="flex gap-1 items-center hover:text-blue-600 active:text-blue-600">
