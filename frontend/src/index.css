@@ -14,4 +14,7 @@
   .svg {
     @apply w-6 h-6 text-gray-400 transition-all duration-300 hover:text-blue-600 active:text-blue-600;
   }
+  .button {
+    @apply bg-blue-600 hover:bg-blue-700 active:transition-all active:translate-y-[2px]  p-2 rounded-lg text-white;
+  }
 }
