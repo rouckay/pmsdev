@@ -9,26 +9,22 @@ import AppLayout from "./components/AppLayout";
 
 function App() {
   return (
-    <main>
-      <>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Navigate replace="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="departments" element={<Departments />} />
-              <Route path="users" element={<Users />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="messages" element={<Messages />} />
-            </Route>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace="dashboard" />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="departments" element={<Departments />} />
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="messages" element={<Messages />} />
+          </Route>
 
-            <Route path="login" element={<Login />} />
-          </Routes>
-        </BrowserRouter>
-      </>
-      {/* <div className="bg-gray-400">header</div>
-      <div className="bg-yellow-200">Pages</div> */}
-    </main>
+          <Route path="login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

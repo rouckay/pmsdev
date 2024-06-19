@@ -8,7 +8,7 @@ import { HiChatBubbleLeftRight } from "react-icons/hi2";
 
 const Sidebar = () => {
   return (
-    <aside className="flex flex-col bg-white-100 px-8 py-8 border-r-2 border-white-100 h-screen gap-y-12">
+    <aside className="flex flex-col bg-white-100 px-8 py-8 border-r-2 border-white-100 h-screen gap-y-8">
       <div className=" flex flex-col items-center gap-2">
         <img
           className="rounded-full h-32 w-32"
