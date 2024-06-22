@@ -1,5 +1,7 @@
+import UsersTable from "../features/Users/UsersTable";
+
 const Users = () => {
-  return <div>Users</div>;
+  return <UsersTable />;
 };
 
 export default Users;
