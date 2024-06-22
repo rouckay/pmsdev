@@ -1,6 +1,5 @@
-import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import Button from "../../components/Button";
+
 import toast from "react-hot-toast";
 import { HiMiniPlusCircle, HiMiniTrash } from "react-icons/hi2";
 
