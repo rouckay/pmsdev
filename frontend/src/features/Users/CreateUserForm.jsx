@@ -137,7 +137,7 @@ const UserForm = ({ onClose }) => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md"
           >
-            Submit
+            Add user
           </button>
         </form>
       </div>
