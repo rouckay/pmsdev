@@ -23,17 +23,17 @@ const ProjectsTable = () => {
             <tr key={index} className="">
               <td className="border-y px-4 py-2">{project.name}</td>
               {/* <td className="border-y px-4 py-2">{project.description}</td> */}
-              <td className="border-y px-4 py-2">{project.start_date}</td>
-              <td className="border-y px-4 py-2">{project.end_date}</td>
-              <td className="border-y px-4 py-2">{project.department_id}</td>
-              <td className="border-y px-4 py-2">{project.created_by}</td>
-              <td className="border-y px-4 py-2">In Progress</td>
-              <td className="border-y px-4 py-2">
+              <td className="border-y px-4 py-4">{project.start_date}</td>
+              <td className="border-y px-4">{project.end_date}</td>
+              <td className="border-y px-4">{project.department_id}</td>
+              <td className="border-y px-4">{project.created_by}</td>
+              <td className="border-y px-4">In Progress</td>
+              <td className="border-y px-4">
                 <span className="p-[5px] rounded-lg bg-green-200 text-green-800">
                   Active
                 </span>
               </td>
-              <td className="border-y px-4 py-2">
+              <td className="border-y px-4">
                 <div className="flex gap-3">
                   <HiEye />
                   <HiMiniPencilSquare />

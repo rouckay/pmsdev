@@ -1,10 +1,8 @@
-import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import Button from "../../components/Button";
 import toast from "react-hot-toast";
-import { HiMiniPlusCircle } from "react-icons/hi2";
+import { HiMiniPlusCircle, HiMiniTrash, HiXMark } from "react-icons/hi2";
 
-const CreateProjectForm = () => {
+const CreateProjectForm = ({ onClose }) => {
   const {
     register,
     handleSubmit,
@@ -24,8 +22,15 @@ const CreateProjectForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 text-[12px]">
-      <div className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-lg overflow-y-auto max-h-screen">
+    <div className="flex justify-center items-center p-8 bg-gray-100 text-sm">
+      <div className="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        >
+          <HiXMark className="h-5 w-5" />
+        </button>
+        <h2 className="text-2xl font-bold mb-5 text-center">Create Project</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
@@ -146,19 +151,21 @@ const CreateProjectForm = () => {
                 <button
                   type="button"
                   onClick={() => remove(index)}
-                  className="p-2 bg-red-500 text-white rounded"
+                  className="p-1 bg-red-500 text-white rounded"
                 >
-                  Remove
+                  <HiMiniTrash className="h-5 w-5" />
                 </button>
               </div>
             ))}
-            <button
-              type="button"
-              onClick={() => append({ name: "", quantity: 1 })}
-              className="mt-2 p-2  rounded-full"
-            >
-              <HiMiniPlusCircle className="h-8 w-8 -translate-y-3" />
-            </button>
+            <div>
+              <button
+                type="button"
+                onClick={() => append({ name: "", quantity: 1 })}
+                className="mt-2 p-2 rounded-full"
+              >
+                <HiMiniPlusCircle className="h-8 w-8 text-blue-500 -translate-y-3 rounded-full" />
+              </button>
+            </div>
           </div>
 
           <button
