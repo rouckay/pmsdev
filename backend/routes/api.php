@@ -92,6 +92,48 @@ Route::post('/add_project', function (Request $request) {
 
     return $project;
 });
+// Single Project View
+Route::get('/project/{id}', function ($id) {
+    $Project = Projects::query()->find($id);
+    if (!$Project) {
+        return response()->json(['message' => 'Project not found'], 404);
+    }
+    return $Project;
+});
+// Update Project
+Route::put('/project/update/{id}', function (Request $request, $id) {
+    $Project = Projects::find($id);
+
+    if (!$Project) {
+        return response()->json(['message' => 'Project not found'], 404);
+    }
+
+    $Project->update($request->all());
+    return response()->json($Project);
+});
+// Delete Project
+Route::delete('/project/delete/{id}', function ($id) {
+    $Project = Projects::find($id);
+
+    if (!$Project) {
+        return response()->json(['message' => 'Project not found'], 404);
+    }
+
+    $Project->delete();
+    return response()->json(['message' => 'Project deleted successfully']);
+});
+Route::middleware('api')->group(function () {
+    Route::delete('/project/delete/{id}', function ($id) {
+        $Project = Projects::find($id);
+
+        if (!$Project) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+
+        $Project->delete();
+        return response()->json(['message' => 'Project deleted successfully']);
+    });
+});
 
 // List of All Projects
 Route::get('/projects', function () {
