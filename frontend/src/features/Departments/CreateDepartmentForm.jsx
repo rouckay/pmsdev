@@ -15,13 +15,13 @@ const CreateDepartmentForm = ({ onClose }) => {
   return (
     <div className="flex justify-center items-center p-8 bg-gray-100">
       <div className="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
-        <button
+        {/* <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
         >
           <HiXMark className="h-5 w-5" />
-        </button>
-        <h2 className="text-2xl font-bold mb-5 text-center">Department Form</h2>
+        </button> */}
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
