@@ -29,7 +29,7 @@ const Window = ({ children, name }) => {
 
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40 backdrop-blur-sm">
-      <div className="relative bg-white p-10 rounded shadow-lg w-full max-w-4xl h-3/4 overflow-y-auto">
+      <div className="relative bg-white p-10 rounded shadow-lg w-full max-w-4xl h-fit overflow-y-auto">
         <button
           onClick={close}
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
@@ -47,6 +47,8 @@ Modal.Open = Open;
 Modal.Window = Window;
 
 export default Modal;
+
+/// OLD MODAL COMPONENT THAT WAS NOT REUSABLE
 
 // const Modal = ({ isOpen, onClose, title, children }) => {
 //   if (!isOpen) return null;

@@ -1,23 +1,19 @@
-import { useState } from "react";
 import Button from "../components/Button";
 import UsersTable from "../features/Users/UsersTable";
 import UserForm from "../features/Users/CreateUserForm";
+import Modal from "../components/Modal";
 
 const Users = () => {
-  const [showUserForm, setShowUserForm] = useState(false);
-
-  const handleClose = () => {
-    setShowUserForm(false);
-  };
-
   return (
     <div className="flex flex-col gap-4">
-      <div className="pr-2 self-end">
-        <Button onClick={() => setShowUserForm((show) => !show)}>
-          Add User
-        </Button>
-      </div>
-      <div>{showUserForm && <UserForm onClose={handleClose} />}</div>
+      <Modal>
+        <Modal.Open opens="user-form">
+          <Button onClick={close}>Add User</Button>
+        </Modal.Open>
+        <Modal.Window name="user-form">
+          <UserForm />
+        </Modal.Window>
+      </Modal>
       <UsersTable />
     </div>
   );

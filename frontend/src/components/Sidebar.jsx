@@ -4,7 +4,7 @@ import {
   HiOutlineHome,
   HiMiniUserGroup,
   HiMiniUsers,
-  HiCog6Tooth,
+  HiBriefcase,
   HiChatBubbleLeftRight,
 } from "react-icons/hi2";
 
@@ -14,8 +14,8 @@ const Sidebar = () => {
   const menuItems = [
     { to: "/dashboard", label: "Dashboard", Icon: HiOutlineHome },
     { to: "/departments", label: "Departments", Icon: HiMiniUserGroup },
+    { to: "/tasks", label: "Tasks", Icon: HiBriefcase },
     { to: "/users", label: "Users", Icon: HiMiniUsers },
-    { to: "/settings", label: "Settings", Icon: HiCog6Tooth },
     { to: "/messages", label: "Messages", Icon: HiChatBubbleLeftRight },
   ];
 

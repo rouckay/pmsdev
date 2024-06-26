@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Departments from "./pages/Departments";
 import Users from "./pages/Users";
-import Settings from "./pages/Settings";
+
 import Messages from "./pages/Messages";
 import Login from "./pages/Login";
+import Tasks from "./pages/Tasks";
 import AppLayout from "./components/AppLayout";
 
 import { Toaster } from "react-hot-toast";
@@ -19,7 +20,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="departments" element={<Departments />} />
             <Route path="users" element={<Users />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="tasks" element={<Tasks />} />
             <Route path="messages" element={<Messages />} />
           </Route>
 

@@ -1,25 +1,10 @@
-import { useState } from "react";
-import CreateDepartmentForm from "../features/Departments/CreateDepartmentForm";
-import Button from "../components/Button";
 import DepartmentsTable from "../features/Departments/DepartmentsTable";
+import AddDepartment from "../features/Departments/AddDepartment";
 
 const Departments = () => {
-  const [showDepartmentForm, setShowDepartmentForm] = useState(false);
-
-  const handleClose = () => {
-    setShowDepartmentForm(false);
-  };
-
   return (
     <div className="flex flex-col gap-4">
-      <div className="pr-2 self-end">
-        <Button onClick={() => setShowDepartmentForm((show) => !show)}>
-          Add Department
-        </Button>
-      </div>
-      <div>
-        {showDepartmentForm && <CreateDepartmentForm onClose={handleClose} />}
-      </div>
+      <AddDepartment />
       <DepartmentsTable />
     </div>
   );
