@@ -15,7 +15,7 @@ function Modal({ children }) {
   const [openName, setOpenName] = useState("");
 
   const close = () => setOpenName("");
-  const open = setOpenName;
+  const open = (name) => setOpenName(name);
 
   return (
     <ModalContext.Provider value={{ openName, open, close }}>
@@ -62,7 +62,7 @@ const Window = ({ children, name }) => {
         >
           <HiXMark size={24} />
         </button>
-        {children}
+        {cloneElement(children, { closeModal: close })}
       </div>
     </div>,
     document.body

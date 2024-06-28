@@ -1,16 +1,19 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const CreateDepartmentForm = ({ onClose }) => {
+const CreateDepartmentForm = ({ closeModal }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    reset();
     toast.success("Department successfully added");
+    closeModal();
   };
 
   return (
@@ -30,7 +33,7 @@ const CreateDepartmentForm = ({ onClose }) => {
           </div>
           <div>
             <label className="block mb-1">Description</label>
-            <input
+            <textarea
               {...register("description", {
                 required: "Description is required",
               })}

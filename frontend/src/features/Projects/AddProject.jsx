@@ -6,7 +6,7 @@ const AddProject = () => {
   return (
     <Modal>
       <Modal.Open opens="project-form">
-        <Button onClick={close}>Add Project</Button>
+        <Button>Add Project</Button>
       </Modal.Open>
       <Modal.Window name="project-form">
         <CreateProjectForm />

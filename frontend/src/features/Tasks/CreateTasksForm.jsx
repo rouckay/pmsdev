@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 
 const projects = [
@@ -27,9 +26,9 @@ const TaskForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 p-4 max-w-lg mx-auto bg-white rounded shadow-md"
+      className="flex flex-col space-y-4 p-4 max-w-lg mx-auto bg-white rounded shadow-md"
     >
-      <h2 className="text-2xl font-bold mb-4">Create Task</h2>
+      <h2 className="text-2xl font-bold mb-4 self-center">Create Task</h2>
 
       <div className="flex flex-wrap -mx-2">
         <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
