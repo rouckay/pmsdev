@@ -1,7 +1,7 @@
 import AddProject from "../features/Projects/AddProject";
 import ProjectsTable from "../features/Projects/ProjectsTable";
 
-const Dashboard = () => {
+const Projects = () => {
   return (
     <div className="flex flex-col gap-4">
       <AddProject />
@@ -10,4 +10,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Projects;
