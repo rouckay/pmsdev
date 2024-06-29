@@ -12,7 +12,7 @@ const Sidebar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const menuItems = [
-    { to: "/dashboard", label: "Dashboard", Icon: HiOutlineHome },
+    { to: "/projects", label: "Projects", Icon: HiOutlineHome },
     { to: "/departments", label: "Departments", Icon: HiMiniUserGroup },
     { to: "/tasks", label: "Tasks", Icon: HiBriefcase },
     { to: "/users", label: "Users", Icon: HiMiniUsers },

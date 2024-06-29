@@ -1,5 +1,7 @@
+import LoginForm from "../features/Authentication/LoginFrom";
+
 const Login = () => {
-  return <div>Login</div>;
+  return <LoginForm />;
 };
 
 export default Login;

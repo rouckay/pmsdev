@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import Projects from "./pages/Projects";
 import Departments from "./pages/Departments";
 import Users from "./pages/Users";
 
@@ -16,8 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace="dashboard" />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route index element={<Navigate replace="projects" />} />
+            <Route path="projects" element={<Projects />} />
             <Route path="departments" element={<Departments />} />
             <Route path="users" element={<Users />} />
             <Route path="tasks" element={<Tasks />} />

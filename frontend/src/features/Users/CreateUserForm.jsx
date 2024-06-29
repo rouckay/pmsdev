@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const CreateUserForm = ({ onClose }) => {
+const CreateUserForm = ({ closeModal }) => {
   const {
     register,
     handleSubmit,
@@ -11,6 +11,7 @@ const CreateUserForm = ({ onClose }) => {
   const onSubmit = (data) => {
     console.log(data);
     toast.success("User successfully created");
+    closeModal();
   };
 
   return (

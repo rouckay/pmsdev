@@ -1,10 +1,12 @@
 import { HiMiniTrash, HiMiniPlusCircle } from "react-icons/hi2";
 import { useForm, useFieldArray } from "react-hook-form";
+import toast from "react-hot-toast";
 
-function FormComponent() {
+function CreateProjectForm({ closeModal }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
     control,
   } = useForm();
@@ -15,6 +17,9 @@ function FormComponent() {
 
   const onSubmit = (data) => {
     console.log(data);
+    toast.success("Project created successfully");
+    reset();
+    closeModal(); // Call the closeModal function
   };
 
   return (
@@ -164,4 +169,4 @@ function FormComponent() {
   );
 }
 
-export default FormComponent;
+export default CreateProjectForm;
