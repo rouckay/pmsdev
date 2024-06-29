@@ -12,11 +12,12 @@ class group_members extends Model
     protected $fillable = [
         'group_id',
         'user_id',
+
     ];
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(groups::class);
+        return $this->belongsTo(Group::class);
     }
     public function user(): BelongsTo
     {

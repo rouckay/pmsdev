@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class groups extends Model
+class Group extends Model // Use singular form for model name
 {
     use HasFactory;
 
@@ -14,15 +14,15 @@ class groups extends Model
         'project_id',
         'name',
         'description',
+        'created_by',
     ];
 
     public function project(): BelongsTo
     {
-        return $this->belongsTo(projects::class);
+        return $this->belongsTo(projects::class); // Ensure correct model name
     }
-
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by'); // Ensure correct model name and foreign key
     }
 }

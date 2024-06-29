@@ -12,6 +12,7 @@ class task_assignments extends Model
     protected $fillable = [
         'task_id',
         'user_id',
+        'assigned_date',
     ];
 
     public function task(): BelongsTo
