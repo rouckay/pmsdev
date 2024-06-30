@@ -83,23 +83,23 @@ const TaskForm = () => {
         </div>
 
         <div className="w-full md:w-1/2 px-2">
-          <label htmlFor="end_date" className="mb-1 block">
-            End Date
+          <label htmlFor="due_date" className="mb-1 block">
+            Due Date
           </label>
           <input
-            id="end_date"
+            id="due_date"
             type="date"
-            {...register("end_date", { required: true })}
+            {...register("due_date", { required: true })}
             className="p-2 border rounded w-full"
           />
-          {errors.end_date && (
+          {errors.due_date && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        {/* <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
           <label htmlFor="assigned_to" className="mb-1 block">
             Assign To
           </label>
@@ -115,6 +115,19 @@ const TaskForm = () => {
             ))}
           </select>
           {errors.assigned_to && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div> */}
+        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+          <label htmlFor="name" className="mb-1 block">
+            Budget
+          </label>
+          <input
+            id="budget"
+            {...register("budget", { required: true })}
+            className="p-2 border rounded w-full"
+          />
+          {errors.budget && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
@@ -171,18 +184,16 @@ const TaskForm = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-
-        <div className="w-full md:w-1/2 px-2">
-          <label htmlFor="due_date" className="mb-1 block">
-            Due Date
+        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+          <label htmlFor="name" className="mb-1 block">
+            Tools
           </label>
           <input
-            id="due_date"
-            type="date"
-            {...register("due_date", { required: true })}
+            id="tools"
+            {...register("tools", { required: true })}
             className="p-2 border rounded w-full"
           />
-          {errors.due_date && (
+          {errors.tools && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
