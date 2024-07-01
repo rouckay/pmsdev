@@ -1,9 +1,11 @@
-import CreateTasksForm from "../features/Tasks/CreateTasksForm";
+import AddTasks from "../features/Tasks/AddTasks";
+import TasksTable from "../features/Tasks/TasksTable";
 
 const Tasks = () => {
   return (
     <div className="flex flex-col gap-4">
-      <CreateTasksForm />
+      <AddTasks />
+      <TasksTable />
     </div>
   );
 };

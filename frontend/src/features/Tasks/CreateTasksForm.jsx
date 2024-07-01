@@ -15,7 +15,7 @@ const departments = [
   { id: 2, name: "Marketing" },
 ];
 
-const TaskForm = () => {
+const CreateTasksForm = () => {
   const {
     register,
     handleSubmit,
@@ -26,12 +26,12 @@ const TaskForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col space-y-4 p-4 max-w-lg mx-auto bg-white rounded shadow-md"
+      className="flex flex-col space-y-3 text-sm"
     >
-      <h2 className="text-2xl font-bold mb-4 self-center">Create Task</h2>
+      <h2 className="text-2xl font-bold mb-2 self-center">Create Task</h2>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="name" className="mb-1 block">
             Task Name
           </label>
@@ -67,7 +67,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="start_date" className="mb-1 block">
             Start Date
           </label>
@@ -99,7 +99,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        {/* <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        {/* <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="assigned_to" className="mb-1 block">
             Assign To
           </label>
@@ -118,7 +118,7 @@ const TaskForm = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div> */}
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="name" className="mb-1 block">
             Budget
           </label>
@@ -154,7 +154,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full px-2 mb-4">
+        <div className="w-full px-2 mb-2">
           <label htmlFor="description" className="mb-1 block">
             Description
           </label>
@@ -167,7 +167,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="status" className="mb-1 block">
             Status
           </label>
@@ -184,7 +184,7 @@ const TaskForm = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="name" className="mb-1 block">
             Tools
           </label>
@@ -209,4 +209,4 @@ const TaskForm = () => {
   );
 };
 
-export default TaskForm;
+export default CreateTasksForm;
