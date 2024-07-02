@@ -15,7 +15,7 @@ const departments = [
   { id: 2, name: "Marketing" },
 ];
 
-const TaskForm = () => {
+const CreateTasksForm = () => {
   const {
     register,
     handleSubmit,
@@ -26,12 +26,12 @@ const TaskForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col space-y-4 p-4 max-w-lg mx-auto bg-white rounded shadow-md"
+      className="flex flex-col space-y-3 text-sm"
     >
-      <h2 className="text-2xl font-bold mb-4 self-center">Create Task</h2>
+      <h2 className="text-2xl font-bold mb-2 self-center">Create Task</h2>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="name" className="mb-1 block">
             Task Name
           </label>
@@ -67,7 +67,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="start_date" className="mb-1 block">
             Start Date
           </label>
@@ -83,23 +83,23 @@ const TaskForm = () => {
         </div>
 
         <div className="w-full md:w-1/2 px-2">
-          <label htmlFor="end_date" className="mb-1 block">
-            End Date
+          <label htmlFor="due_date" className="mb-1 block">
+            Due Date
           </label>
           <input
-            id="end_date"
+            id="due_date"
             type="date"
-            {...register("end_date", { required: true })}
+            {...register("due_date", { required: true })}
             className="p-2 border rounded w-full"
           />
-          {errors.end_date && (
+          {errors.due_date && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        {/* <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="assigned_to" className="mb-1 block">
             Assign To
           </label>
@@ -115,6 +115,19 @@ const TaskForm = () => {
             ))}
           </select>
           {errors.assigned_to && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div> */}
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
+          <label htmlFor="name" className="mb-1 block">
+            Budget
+          </label>
+          <input
+            id="budget"
+            {...register("budget", { required: true })}
+            className="p-2 border rounded w-full"
+          />
+          {errors.budget && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
@@ -141,7 +154,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full px-2 mb-4">
+        <div className="w-full px-2 mb-2">
           <label htmlFor="description" className="mb-1 block">
             Description
           </label>
@@ -154,7 +167,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-wrap -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
           <label htmlFor="status" className="mb-1 block">
             Status
           </label>
@@ -171,18 +184,16 @@ const TaskForm = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-
-        <div className="w-full md:w-1/2 px-2">
-          <label htmlFor="due_date" className="mb-1 block">
-            Due Date
+        <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
+          <label htmlFor="name" className="mb-1 block">
+            Tools
           </label>
           <input
-            id="due_date"
-            type="date"
-            {...register("due_date", { required: true })}
+            id="tools"
+            {...register("tools", { required: true })}
             className="p-2 border rounded w-full"
           />
-          {errors.due_date && (
+          {errors.tools && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
@@ -198,4 +209,4 @@ const TaskForm = () => {
   );
 };
 
-export default TaskForm;
+export default CreateTasksForm;

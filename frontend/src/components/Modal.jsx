@@ -54,7 +54,7 @@ const Window = ({ children, name }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40 backdrop-blur-sm">
       <div
         ref={ref}
-        className="relative bg-white p-10 rounded shadow-lg w-full max-w-4xl max-h-[80vh] overflow-y-auto"
+        className="relative bg-white p-10 rounded-lg shadow-lg w-full max-w-4xl max-h-[80vh] overflow-y-auto"
       >
         <button
           onClick={close}
