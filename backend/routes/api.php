@@ -21,14 +21,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // list all user in system 
-Route::get('/users', function () {
-    $user = User::query()->get();
-    if (!$user) {
-        return response()->json(['message' => 'There is No User in Database!'], 404);
+Route::group(
+    ['middleware' => ['role:admin']],
+    function () {
+        Route::get('/users', function () {
+            return User::query()->get();
+        });
     }
-    return $user;
-
-});
+);
 // list single user in system
 Route::get('/user/{id}', function ($id) {
     $user = User::query()->find($id);
@@ -36,7 +36,7 @@ Route::get('/user/{id}', function ($id) {
         return response()->json(['message' => 'User not found'], 404);
     }
     return $user;
-});
+})->middleware('auth:sanctum');
 // update user in system
 
 Route::put('/user/update/{id}', function (Request $request, $id) {
@@ -67,10 +67,20 @@ Route::post('/login', function (Request $request) {
 
     if (Auth::attempt($credentials)) {
         // return redirect()->intended('/');
-        return "<h1>You are welcome dear</h1>";
+        if (Auth::check()) {
+            return "You are logged in Thank you";
+        } else {
+            return "You are not logged in";
+        }
+        // return "<h1>You are welcome dear</h1>";
     }
 
     return "<h1>Incorrect Email or Password!</h1>";
+});
+// logtout System
+Route::get('/logout', function () {
+    Auth::logout();
+    return Redirect::to('/');
 });
 
 // Register System for Users
