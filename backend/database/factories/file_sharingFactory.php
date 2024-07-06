@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\groups>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\file_sharing>
  */
-class GroupsFactory extends Factory
+class file_sharingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,10 @@ class GroupsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'project_id' => 1,
+            'user_id' => 1,
+            'document_url' => fake()->url(),
+            'message' => fake()->realText(),
         ];
     }
 }

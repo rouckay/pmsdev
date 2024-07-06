@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\file_sharing>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\group_members>
  */
-class FileSharingFactory extends Factory
+class group_membersFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class FileSharingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'group_id' => 1,
+            'user_id' => 1,
         ];
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\group_members>
  */
-class GroupMembersFactory extends Factory
+class group_membersFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class GroupMembersFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'group_id' => 1,
+            'user_id' => 1,
         ];
     }
 }

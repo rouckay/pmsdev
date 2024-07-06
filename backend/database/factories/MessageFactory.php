@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\departments>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\messages>
  */
-class DepartmentsFactory extends Factory
+class MessageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,9 @@ class DepartmentsFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_id' => 1,
-            'name' => fake()->name()
+            'sender_id' => 1,
+            'group_id' => 1,
+            'content' => fake()->realText(),
         ];
     }
 }

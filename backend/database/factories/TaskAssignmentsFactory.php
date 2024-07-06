@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\task_assignments>
  */
-class TaskAssignmentsFactory extends Factory
+class task_assignmentsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,9 @@ class TaskAssignmentsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'task_id' => 1,
+            'user_id' => 1,
+            'assigned_date' => fake()->date(),
         ];
     }
 }
