@@ -17,7 +17,13 @@ class TasksFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'project_id' => 1,
+            'description' => fake()->realText(),
+            'assigned_to' => 1,
+            'percentage' => fake()->randomDigit(),
+            'due_date' => fake()->date(),
+            'status' => fake()->boolean(),
         ];
     }
 }

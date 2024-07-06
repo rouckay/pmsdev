@@ -2,6 +2,7 @@
 
 return [
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -14,7 +15,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'admin' => \App\Http\Middleware\CheckAdminRole::class,
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -122,5 +123,6 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
 
 ];

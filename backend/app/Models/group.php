@@ -14,7 +14,7 @@ class Group extends Model // Use singular form for model name
         'project_id',
         'name',
         'description',
-        'created_by',
+        'user_id',
     ];
 
     public function project(): BelongsTo

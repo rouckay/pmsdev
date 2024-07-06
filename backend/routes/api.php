@@ -15,19 +15,36 @@ use App\Models\projects;
 use Illuminate\Support\Facades\Validator;
 use App\Models\tasks;
 use Illuminate\Support\Facades\Log;
+use App\Http\Resources\UserResource;
+use App\Http\Controllers\Api\{
+    RegisterController,
+    LoginController
+};
+use App\Http\Middleware\CheckAdminRole;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// admin request
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/google', function (Request $request) {
+        return "hello";
+    });
+});
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    })->middleware('auth:sanctum');
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return new UserResource($request->user());
+});
 
 // list all user in system 
-Route::get('/users', function () {
-    $user = User::query()->get();
-    if (!$user) {
-        return response()->json(['message' => 'There is No User in Database!'], 404);
-    }
-    return $user;
-
+Route::middleware([CheckAdminRole::class])->group(function () {
+    Route::get('/users', function () {
+        return User::query()->get();
+    });
 });
 // list single user in system
 Route::get('/user/{id}', function ($id) {
@@ -36,7 +53,7 @@ Route::get('/user/{id}', function ($id) {
         return response()->json(['message' => 'User not found'], 404);
     }
     return $user;
-});
+})->middleware('auth:sanctum');
 // update user in system
 
 Route::put('/user/update/{id}', function (Request $request, $id) {
@@ -62,32 +79,50 @@ Route::put('/user/update/{id}', function (Request $request, $id) {
 
 
 // Login System for Users
-Route::post('/login', function (Request $request) {
-    $credentials = $request->only('email', 'password');
+Route::post('login', [LoginController::class, 'login']);
+// Route::post('/login', function (Request $request) {
+//     $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
-        // return redirect()->intended('/');
-        return "<h1>You are welcome dear</h1>";
-    }
+//     if (Auth::attempt($credentials)) {
+//         // return redirect()->intended('/');
+//         if (Auth::check()) {
+//             return "You are logged in Thank you";
+//         } else {
+//             return "You are not logged in";
+//         }
+//         // return "<h1>You are welcome dear</h1>";
+//     }
 
-    return "<h1>Incorrect Email or Password!</h1>";
-});
+//     return "<h1>Incorrect Email or Password!</h1>";
+// });
+
 
 // Register System for Users
-Route::post('/register', function (Request $request) {
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone_number' => $request->phone_number,
-        'address' => $request->address,
-        'type' => $request->type,
-        'password' => Hash::make($request->password),
-        'active' => $request->active,
-    ]);
-
-
-    return $user;
+Route::middleware(['auth', CheckAdminRole::class])->group(function () {
+    Route::post('register', [RegisterController::class, 'register']);
 });
+// Route::post('/register', function (Request $request) {
+//     $user = User::create([
+//         'name' => $request->name,
+//         'email' => $request->email,
+//         'phone_number' => $request->phone_number,
+//         'address' => $request->address,
+//         'type' => $request->type,
+//         'password' => Hash::make($request->password),
+//         'active' => $request->active,
+//     ]);
+
+
+//     return $user;
+// });
+
+// logtout System
+Route::get('/logout', function () {
+    Auth::logout();
+    return Redirect::to('/');
+});
+
+
 
 // Project Registeration 
 Route::post('/add_project', function (Request $request) {
@@ -100,7 +135,7 @@ Route::post('/add_project', function (Request $request) {
     ]);
 
     return $project;
-});
+})->middleware(['auth:sanctum']);
 // Single Project View
 Route::get('/project/{id}', function ($id) {
     $Project = Projects::query()->find($id);
