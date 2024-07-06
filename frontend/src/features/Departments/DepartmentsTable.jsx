@@ -1,7 +1,23 @@
 import { HiEye, HiMiniPencilSquare, HiMiniTrash } from "react-icons/hi2";
-import staticData from "../../static data/data";
+
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const DepartmentsTable = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://dev.expertrobot.pro/api/departments")
+      .then((res) => {
+        setData(res.data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="overflow-x-auto rounded-lg text-[15px]">
       <table className="table-auto border-collapse border-slate-500 w-full">
@@ -15,10 +31,10 @@ const DepartmentsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {staticData.departments.map((department, index) => (
+          {data.map((department, index) => (
             <tr key={index} className="">
               <td className="border-y px-4 py-4">{department.name}</td>
-              <td className="border-y px-4 ">{department.company_name}</td>
+              <td className="border-y px-4 ">{department.company_id}</td>
               <td className="border-y px-4 ">{department.description}</td>
               <td className="border-y px-4 ">
                 <span
