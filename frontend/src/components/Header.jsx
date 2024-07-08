@@ -5,13 +5,13 @@ const Header = () => {
     <header className="bg-white-100 px-4 py-8 border-b-2 border-gray-100 w-full">
       <div>
         <ul className="flex gap-6 justify-end">
-          <li className="flex gap-1 items-center hover:text-blue-600 active:text-blue-600">
+          <li className="flex gap-1 items-center hover:text-blue-600 active:text-blue-600 cursor-pointer">
             <img
               src="../src/img/default-user.jpg"
               alt="User Photo"
               className="h-[30px] w-[30px] rounded-full"
             />
-            <span className="text-lg">Admin</span>
+            <span className="text-lg ">Admin</span>
           </li>
           <li>
             <button className="flex gap-1 items-center hover:text-blue-600 active:text-blue-600">
