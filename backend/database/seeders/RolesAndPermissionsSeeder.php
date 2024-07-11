@@ -64,10 +64,41 @@ class RolesAndPermissionsSeeder extends Seeder
         $group_delete = Permission::create(['name' => 'groups.delete']);
         $group_edit = Permission::create(['name' => 'groups.edit']);
 
+        //messages Permission
+
+        $message_list = Permission::create(['name' => 'messages.list']);
+        $message_view = Permission::create(['name' => 'messages.view']);
+        $message_create = Permission::create(['name' => 'messages.create']);
+        $message_update = Permission::create(['name' => 'messages.update']);
+        $message_delete = Permission::create(['name' => 'messages.delete']);
+        $message_edit = Permission::create(['name' => 'messages.edit']);
+
+        //roles Permission
+        $role_list = Permission::create(['name' => 'roles.list']);
+        $role_view = Permission::create(['name' => 'roles.view']);
+        $role_create = Permission::create(['name' => 'roles.create']);
+        $role_update = Permission::create(['name' => 'roles.update']);
+        $role_delete = Permission::create(['name' => 'roles.delete']);
+        $role_edit = Permission::create(['name' => 'roles.edit']);
 
 
         $admin_role = Role::create(['name' => 'admin']);
         $admin_role->givePermissionTo([
+
+            $message_list,
+            $message_view,
+            $message_create,
+            $message_update,
+            $message_delete,
+            $message_edit,
+
+            $role_list,
+            $role_view,
+            $role_create,
+            $role_update,
+            $role_delete,
+            $role_edit,
+
             $user_list,
             $user_view,
             $user_create,
@@ -117,14 +148,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
         $admin->assignRole($admin_role);
-        $admin->givePermissionTo([
-            $user_list,
-            $user_view,
-            $user_create,
-            $user_update,
-            $user_delete,
-            $user_edit,
+        // Create Manager Account
+        $manager = User::create([
+            'name' => 'Manager UNICEF',
+            'email' => 'manager@manager.com',
+            'password' => bcrypt('password')
         ]);
+
 
         $user = User::create([
             'name' => 'user',
@@ -136,7 +166,17 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
         $user->assignRole($user_role); // This will Automatically assign User Role to Users
         $user->givePermissionTo([
-            $user_list,
+            $group_list,
+            $group_view,
+
+            $department_list,
+            $department_view,
+
+            $project_list,
+            $project_view,
+
+            $task_list,
+            $task_view,
         ]);
         $user_role->givePermissionTo([
             $user_list,
@@ -144,7 +184,44 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Creating the manager role and assigning permissions
         $managerRole = Role::create(['name' => 'manager']);
-        $managerRole->givePermissionTo(['users.view', 'users.list']);  // Assign necessary permissions
+        $managerRole->givePermissionTo([
+
+            $group_list,
+            $group_view,
+            $group_create,
+            $group_update,
+            $group_delete,
+            $group_edit,
+
+            $department_list,
+            $department_view,
+            $department_create,
+            $department_update,
+            $department_delete,
+            $department_edit,
+
+            $project_list,
+            $project_view,
+            $project_create,
+            $project_update,
+            $project_delete,
+            $project_edit,
+
+            $company_list,
+            $company_view,
+            $company_create,
+            $company_update,
+            $company_delete,
+            $company_edit,
+
+            $task_list,
+            $task_view,
+            $task_create,
+            $task_update,
+            $task_delete,
+            $task_edit,
+
+        ]);  // Assign necessary permissions
 
     }
     public function down()

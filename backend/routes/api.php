@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Models\companies;
 use App\Models\departments;
 use App\Models\file_sharing;
@@ -122,6 +123,13 @@ Route::get('/logout', function () {
     return Redirect::to('/');
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    // Admin routes
+    Route::post('/admin-action', [AdminController::class, 'adminAction']);
+
+    // Moderator routes
+    Route::get('/manager-action', 'ModeratorController@moderatorAction');
+});
 
 
 // Project Registeration 
