@@ -6,12 +6,14 @@ use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\Projects;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Auth;
 
 class ProjectsResource extends Resource
 {
@@ -24,19 +26,23 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date'),
-                Forms\Components\TextInput::make('department_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Toggle::make('active')
-                    ->required(),
+                Card::make([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(191),
+                    Forms\Components\RichEditor::make('description')
+                        ->columnSpanFull(),
+                    Forms\Components\DatePicker::make('start_date')
+                        ->required(),
+                    Forms\Components\DatePicker::make('end_date'),
+                    Forms\Components\Select::make('department_id')
+                        ->relationship('department', 'name')
+                        ->label('Department')
+                        ->searchable()
+                        ->required(),
+                    Forms\Components\Toggle::make('active')
+                        ->required(),
+                ]),
             ]);
     }
 

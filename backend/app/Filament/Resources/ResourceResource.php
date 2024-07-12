@@ -23,7 +23,18 @@ class ResourceResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('project_id')
+                    ->relationship('project', 'name')
+                    ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(191),
+                Forms\Components\TextInput::make('resource_type')
+                    ->required()
+                    ->maxLength(191),
+                Forms\Components\TextInput::make('quantity')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,7 +42,24 @@ class ResourceResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('project.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('resource_type')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('quantity')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

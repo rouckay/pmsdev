@@ -1,13 +1,20 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\companiesController;
+use App\Http\Controllers\departmentsController;
+use App\Http\Controllers\FileSharingController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupMembersController;
+use App\Http\Controllers\MessageController;
 use App\Models\companies;
 use App\Models\departments;
 use App\Models\file_sharing;
 use App\Models\Group;
 use App\Models\group_members;
+use App\Models\GroupMembers;
 use App\Models\Message;
-use App\Models\resources;
+use App\Models\Resource;
 use App\Models\task_assignments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -122,15 +129,52 @@ Route::get('/logout', function () {
     Auth::logout();
     return Redirect::to('/');
 });
-
+//........................................................................
 Route::middleware('auth:sanctum')->group(function () {
     // Admin routes
-    Route::post('/admin-action', [AdminController::class, 'adminAction']);
+    // Company APIs Routes
+    // Route::post('/admin-action', [AdminController::class, 'adminAction']);
+    Route::get('/companies', [companiesController::class, 'index']);
+    Route::post('/add_company', [companiesController::class, 'store']);
+    Route::get('/company/{id}', [companiesController::class, 'show']);
+    Route::put('/company/update/{id}', [companiesController::class, 'edit']);
+    Route::delete('/company/delete/{id}', [companiesController::class, 'destroy']);
 
+    // Departments APIs Routes
+    Route::get('/departments', [departmentsController::class, 'index']);
+    Route::post('/add_department', [departmentsController::class, 'store']);
+    Route::put('/department/update/{id}', [departmentsController::class, 'update']);
+    Route::get('/department/{id}', [departmentsController::class, 'show']);
+    Route::delete('/department/delete/{id}', [departmentsController::class, 'destroy']);
+
+    // File Sharing
+    Route::get('/files', [FileSharingController::class, 'index']);
+    Route::get('/file/{id}', [FileSharingController::class, 'show']);
+    Route::post('/add_file', [FileSharingController::class, 'store']);
+    Route::put('/file/update/{id}', [FileSharingController::class, 'edit']);
+    Route::delete('/file/delete/{id}', [FileSharingController::class, 'destroy']);
+
+    //Group Routes
+    Route::get('/groups', [GroupController::class, 'index']);
+    Route::get('/groups', [GroupController::class, 'index']);
+    Route::post('/add_group', [GroupController::class, 'store']);
+    Route::put('/group/update/{id}', [GroupController::class, 'update']);
+    Route::delete('/group/delete/{id}', [GroupController::class, 'destroy']);
+
+    //Group_member Routes
+    Route::get('/group_members', [GroupMembersController::class, 'index']);
+    Route::get('/group_member/{id}', [GroupMembersController::class, 'show']);
+    Route::post('/add_group_member', [GroupMembersController::class, 'store']);
+    Route::put('/group_member/update/{id}', [GroupMembersController::class, 'update']);
+    Route::delete('/group_member/delete/{id}', [GroupMembersController::class, 'destroy']);
+
+    // Messages Routes
+    Route::post('/add_message', [MessageController::class, 'store']);
     // Moderator routes
     Route::get('/manager-action', 'ModeratorController@moderatorAction');
 });
 
+//........................................................................
 
 // Project Registeration 
 Route::post('/add_project', function (Request $request) {
@@ -193,45 +237,13 @@ Route::get('/projects', function () {
 });
 
 // List of All Departments
-Route::get('/departments', function () {
-    return departments::query()->get();
-});
+
 // Single Department View
-Route::get('/department/{id}', function ($id) {
-    $department = departments::query()->find($id);
-    if (!$department) {
-        return response()->json(['message' => 'Department not found'], 404);
-    }
-    return $department;
-});
+
 // Add Departments
-Route::post('/add_department', function (Request $request) {
-    $department = departments::create([
-        'name' => $request->name,
-        'company_id' => $request->company_id,
-    ]);
-    return $department;
-});
+
 // Update Departments
-Route::put('/department/update/{id}', function (Request $request, $id) {
-    $department = departments::find($id);
 
-    if (!$department) {
-        return response()->json(['message' => 'Department not found'], 404);
-    }
-    $department->update($request->all());
-    return $department;
-});
-
-Route::delete('/department/delete/{id}', function ($id) {
-    $department = departments::find($id);
-
-    if (!$department) {
-        return response()->json(['message' => 'Department not found'], 404);
-    }
-    $department->delete();
-    return response()->json(['message' => 'Department deleted successfully']);
-});
 // Add Task
 Route::post('/add_task', function (Request $request) {
     // Validate the incoming request
@@ -378,64 +390,11 @@ Route::delete('/task_assignment/delete/{id}', function ($id) {
     return response()->json(['message' => 'Task assignment is deleted successfully!']);
 });
 // File Sharing API Routes
-Route::get('/files', function () {
-    return file_sharing::query()->get();
-});
+
 // Single File View
-Route::get('/file/{id}', function ($id) {
-    $file = file_sharing::find($id);
 
-    if (!$file) {
-        return response()->json(['message' => 'File not found'], 404);
-    }
-    return $file;
-});
-Route::post('/add_file', function (Request $request) {
-    try {
-        $file = file_sharing::create([
-            'project_id' => $request->project_id,
-            'user_id' => $request->user_id,
-            'document_url' => $request->document_url,
-            'message' => $request->message,
-        ]);
-        return response()->json(['message' => 'File is created successfully!', 'File:' => $file]);
-    } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error creating file: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 // update file
-Route::put('/file/update/{id}', function (Request $request, $id) {
-    $file = file_sharing::find($id);
-
-    if (!$file) {
-        return response()->json(['message' => 'File not found!']);
-    }
-    try {
-        $file->update($request->all());
-        return response()->json(['message' => 'File is updated successfully!', 'File:' => $file]);
-    } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error updating file: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 // Delete file
-Route::delete('/file/delete/{id}', function ($id) {
-    $file = file_sharing::find($id);
-    if (!$file) {
-        return response()->json(['message' => 'File not found'], 404);
-    }
-    try {
-        $file->delete();
-        return response()->json(['message' => 'File is deleted successfully!', 'file' => $file]);
-    } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error deleting file: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 
 
 
@@ -450,94 +409,15 @@ Route::delete('/file/delete/{id}', function ($id) {
 
 
 // All Groups not working
-Route::get('/groups', function () {
-    try {
-        return Group::query()->get();
-    } catch (\Exception $e) {
-        Log::error('Error retrieving groups: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
-// add Groups not working 
-Route::post('/add_group', function (Request $request) {
-    // $request->validate([
-    //     'project_id' => 'required|exists:projects,id',
-    //     'name' => 'required|string|max:255',
-    //     'description' => 'required|string',
-    //     'created_by' => 'required|exists:created_by,id',
-    // ]);
 
-    try {
-        $group = Group::create([
-            'project_id' => $request->project_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'created_by' => $request->created_by
-        ]);
-        return response()->json($group);
-    } catch (\Exception $e) {
-        Log::error('Error creating group: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 // Update Group
-Route::put('/group/update/{id}', function (Request $request, $id) {
-    $group = Group::find($id);
 
-    if (!$group) {
-        return response()->json(['message' => 'Group not found'], 404);
-    }
-
-    // $request->validate([
-    //     'project_id' => 'nullable|exists:projects,id',
-    //     'name' => 'nullable|string|max:255',
-    //     'description' => 'nullable|string',
-    // ]);
-
-    try {
-        $group->update($request->all());
-        return response()->json($group, 200);
-    } catch (\Exception $e) {
-        Log::error('Error updating group: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 // Delete Group
-Route::delete('/group/delete/{id}', function ($id) {
-    $group = Group::find($id);
-
-    if (!$group) {
-        return response()->json(['message' => 'Group not found'], 404);
-    }
-
-    try {
-        $group->delete();
-        return response()->json(['message' => 'Group deleted successfully'], 200);
-    } catch (\Exception $e) {
-        Log::error('Error deleting group: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
 
 // Group Members API Requests
 // add group members
-Route::post('/add_group_member', function (Request $request) {
-    try {
-        $group_member = group_members::create([
-            'group_id' => $request->group_id,
-            'user_id' => $request->user_id,
-        ]);
-        return response()->json(['message' => 'Group Member is created successfully!']);
-    } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error creating group member: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
+
 // get all group members
-Route::get('/group_members', function () {
-    return group_members::query()->get();
-});
 
 
 
@@ -554,20 +434,7 @@ Route::get('/group_members', function () {
 
 // Message API Requests
 // add message
-Route::post('/add_message', function (Request $request) {
-    try {
-        $message = Message::create([
-            'sender_id' => $request->sender_id,
-            'group_id' => $request->group_id,
-            'content' => $request->content,
-        ]);
-        return response()->json(['message' => 'Message is created successfully!']);
-    } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error creating message: ' . $e->getMessage());
-        return response()->json(['error' => 'Internal Server Error'], 500);
-    }
-});
+
 // get all message
 Route::get('/messages', function () {
     return Message::query()->get();
@@ -626,7 +493,7 @@ Route::get('/messages', function () {
 // Resources API Request
 // Add resources
 Route::post('/add_resource', function (Request $request) {
-    $resources = resources::create([
+    $resources = Resource::create([
         'project_id' => $request->project_id,
         'name' => $request->name,
         'resource_type' => $request->resource_type,
@@ -636,11 +503,11 @@ Route::post('/add_resource', function (Request $request) {
 });
 // get all Resource
 Route::get('/resources', function () {
-    return resources::query()->get();
+    return Resource::query()->get();
 });
 // get single Resources
 Route::get('/resource/{id}', function ($id) {
-    $resource = resources::find($id);
+    $resource = Resource::find($id);
     if (!$resource) {
         return response()->json(['message' => 'Could Not found any resources']);
     }
@@ -648,7 +515,7 @@ Route::get('/resource/{id}', function ($id) {
 });
 // Edit Resource
 Route::put('/resource/update/{id}', function (Request $request, $id) {
-    $resource = resources::find($id);
+    $resource = Resource::find($id);
 
     if (!$resource) {
         return response()->json(['message' => 'Resources not found!']);
@@ -658,49 +525,16 @@ Route::put('/resource/update/{id}', function (Request $request, $id) {
 });
 // delete Resource
 Route::delete('/resource/delete/{id}', function ($id) {
-    $resource = resources::find($id);
+    $resource = Resource::find($id);
     if (!$resource) {
         return response()->json(['message' => 'Could not found resource']);
     }
 });
 // Started Company API Requests
 // add Company
-Route::post('/add_company', function (Request $request) {
-    $company = companies::create([
-        'name' => $request->name,
-    ]);
-    return $company;
-});
 // List of All Company
-Route::get('/companies', function () {
-    return companies::query()->get();
-});
-Route::get('/company/{id}', function ($id) {
-    $company = companies::query()->find($id);
-    if (!$company) {
-        return response()->json(['message' => 'Company not found'], 404);
-    }
-    return $company;
-});
 // Update company
-Route::put('/company/update/{id}', function (Request $request) {
-    $company = companies::find($request->id);
-    if (!$company) {
-        return response()->json(['message' => 'Company not found'], 404);
-    }
-    $company->update($request->all());
-    return $company;
-});
-
 // Delete Company
-Route::delete('/company/delete/{id}', function ($id) {
-    $company = companies::find($id);
-    if (!$company) {
-        return response()->json(['message' => 'Company not found'], 404);
-    }
-    $company->delete();
-    return response()->json(['message' => 'Company deleted successfully']);
-});
 
 
 

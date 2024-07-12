@@ -6,20 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class resources extends Model
+class FileSharing extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'project_id',
-        'name',
-        'resource_type',
-        'quantity',
+        'user_id',
+        'document_url',
+        'message',
     ];
 
-    public function Project(): BelongsTo
+    public function project(): BelongsTo
     {
         return $this->belongsTo(projects::class);
     }
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

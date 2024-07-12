@@ -23,6 +23,6 @@ class Group extends Model // Use singular form for model name
     }
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by'); // Ensure correct model name and foreign key
+        return $this->belongsTo(User::class); // Ensure correct model name and foreign key
     }
 }

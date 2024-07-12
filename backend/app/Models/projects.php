@@ -20,7 +20,7 @@ class projects extends Model
 
     public function Resources(): HasMany
     {
-        return $this->hasMany(Resources::class);
+        return $this->hasMany(Resource::class);
     }
 
     public function department(): HasMany

@@ -26,6 +26,8 @@ class DepartmentsResource extends Resource
             ->schema([
                 Forms\Components\Select::make('company_id')
                     ->relationship('company', 'name')
+                    ->label('Company')
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()

@@ -6,19 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class file_sharing extends Model
+class GroupMembers extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'project_id',
+        'group_id',
         'user_id',
-        'document_url',
-        'message',
+
     ];
 
-    public function project(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(projects::class);
+        return $this->belongsTo(Group::class);
     }
     public function user(): BelongsTo
     {

@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\companies;
 use App\Models\departments;
-use App\Models\file_sharing;
+use App\Models\FileSharing;
 use App\Models\Group;
-use App\Models\group_members;
+use App\Models\GroupMembers;
 use App\Models\Message;
 use App\Models\projects;
-use App\Models\resources;
-use App\Models\task_assignments;
+use App\Models\Resource;
+use App\Models\TaskAssignments;
 use App\Models\tasks;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
 
         companies::factory(10)->create();
         departments::factory(10)->create();
-        file_sharing::factory(10)->create();
-        group_members::factory(10)->create();
+        FileSharing::factory(10)->create();
+        GroupMembers::factory(10)->create();
         Group::factory(10)->create();
         // Message::factory(0)->create();
         projects::factory(10)->create();
-        resources::factory(10)->create();
-        // task_assignments::factory(10)->create();
+        Resource::factory(10)->create();
+        // TaskAssignments::factory(10)->create();
         tasks::factory(10)->create();
         // User::factory(10)->create();
         // $this->call(RolesAndPermissionsSeeder::class);

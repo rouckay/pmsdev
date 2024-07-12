@@ -29,15 +29,23 @@ class TasksResource extends Resource
                     ->maxLength(191),
                 Forms\Components\Select::make('project_id')
                     ->relationship('project', 'name')
+                    ->label('Project')
+                    ->searchable()
                     ->required(),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('assigned_to')
+                Forms\Components\Select::make('assigned_to')
+                    ->relationship('assignedTo', 'name')
+                    ->label('Assign to')
+                    ->searchable(),
+                Forms\Components\Select::make('percentage')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('percentage')
-                    ->required()
-                    ->numeric()
+                    ->options([
+                        '25' => '25%',
+                        '50' => '50%',
+                        '75' => '75%',
+                        '100' => '100%',
+                    ])
                     ->default(0),
                 Forms\Components\DatePicker::make('due_date')
                     ->required(),
@@ -76,7 +84,7 @@ class TasksResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

@@ -18,6 +18,7 @@ class GroupResource extends Resource
     protected static ?string $model = Group::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Social';
 
     public static function form(Form $form): Form
     {
@@ -29,7 +30,7 @@ class GroupResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->maxLength(191),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
