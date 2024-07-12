@@ -12,7 +12,12 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $message = Message::query()->get();
+            return response()->json(['Data' => $message]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
@@ -34,7 +39,7 @@ class MessageController extends Controller
                 'group_id' => $request->group_id,
                 'content' => $request->content,
             ]);
-            return response()->json(['message' => 'Message is created successfully!']);
+            return response()->json(['message' => 'Message is created successfully!', 'Data' => $message]);
         } catch (\Exception $e) {
             // Log the error for debugging
             \Log::error('Error creating message: ' . $e->getMessage());
@@ -45,9 +50,14 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Message $message)
+    public function show(Request $request)
     {
-        //
+        $message = Message::find($request->id);
+        try {
+            return $message;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
@@ -63,14 +73,23 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Message $message)
+    public function destroy(Request $request)
     {
-        //
+        $message = Message::find($request->id);
+        if (!$message) {
+            return response()->json(['error' => 'Message not found!'], 404);
+        }
+        try {
+            $message->delete();
+            return response()->json(['message' => 'Message is deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 }

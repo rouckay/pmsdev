@@ -170,6 +170,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Messages Routes
     Route::post('/add_message', [MessageController::class, 'store']);
+    Route::get('/messages', [MessageController::class, 'index']);
+    Route::get('/message/{id}', [MessageController::class, 'show']);
+    Route::delete('/message/delete/{id}', [MessageController::class, 'destroy']);
+
+
+
     // Moderator routes
     Route::get('/manager-action', 'ModeratorController@moderatorAction');
 });
@@ -436,9 +442,6 @@ Route::delete('/task_assignment/delete/{id}', function ($id) {
 // add message
 
 // get all message
-Route::get('/messages', function () {
-    return Message::query()->get();
-});
 
 
 
