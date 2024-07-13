@@ -53,6 +53,9 @@ class GroupMembersController extends Controller
     public function show(Request $request)
     {
         $groupMember = GroupMembers::find($request->id);
+        if (!$groupMember) {
+            return response()->json(['message' => 'Could Not Found any Member Group']);
+        }
         try {
             return $groupMember;
         } catch (\Exception $e) {
