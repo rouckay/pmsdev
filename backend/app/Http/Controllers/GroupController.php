@@ -12,13 +12,16 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        try {
-            return Group::query()->get();
-        } catch (\Exception $e) {
-            Log::error('Error retrieving groups: ' . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error'], 500);
+        $user = $request->user();
+        if ($user->hasRole('admin') || $user->hasRole('Manager')) {
+            try {
+                return Group::query()->get();
+            } catch (\Exception $e) {
+                Log::error('Error retrieving groups: ' . $e->getMessage());
+                return response()->json(['error' => 'Internal Server Error'], 500);
+            }
         }
     }
 
@@ -36,7 +39,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('Manager')) {
             try {
                 $group = Group::create([
                     'project_id' => $request->project_id,
@@ -55,9 +58,18 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Group $group)
+    public function show(Request $request)
     {
-        //
+        $group = Group::find($request->id);
+        if (!$group) {
+            return response()->json(['message' => 'Group not found'], 404);
+        }
+        try {
+            return response()->json($group);
+        } catch (\Exception $e) {
+            Log::error('Error retrieving groups: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
@@ -74,7 +86,7 @@ class GroupController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('Manager')) {
             $group = Group::find($request->id);
 
             if (!$group) {
@@ -103,7 +115,7 @@ class GroupController extends Controller
     public function destroy(Request $request)
     {
         $user = $request->user();
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('Manager')) {
             $group = Group::find($request->id);
 
             if (!$group) {

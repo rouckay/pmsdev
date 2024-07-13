@@ -161,7 +161,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Group Routes
     Route::get('/groups', [GroupController::class, 'index']);
-    Route::get('/groups', [GroupController::class, 'index']);
+    Route::get('/group/{id}', [GroupController::class, 'show']);
     Route::post('/add_group', [GroupController::class, 'store']);
     Route::put('/group/update/{id}', [GroupController::class, 'update']);
     Route::delete('/group/delete/{id}', [GroupController::class, 'destroy']);
@@ -177,6 +177,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/add_message', [MessageController::class, 'store']);
     Route::get('/messages', [MessageController::class, 'index']);
     Route::get('/message/{id}', [MessageController::class, 'show']);
+    Route::put('/message/update/{id}', [MessageController::class, 'update']);
     Route::delete('/message/delete/{id}', [MessageController::class, 'destroy']);
 
     // Projects Routes

@@ -12,13 +12,8 @@ class FileSharingController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        if ($user->hasRole('admin') || $user->hasRole('Manager')) {
-            $Files = FileSharing::query()->get();
-            return $Files;
-        } else {
-            return response()->json(['message' => 'Not Authonticated sorry!']);
-        }
+        $Files = FileSharing::query()->get();
+        return $Files;
     }
 
     /**

@@ -71,9 +71,19 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request)
     {
+        $message = Message::find($request->id);
+        if (!$message) {
+            return response()->json(['error' => 'Message not found!'], 404);
+        }
+        try {
+            $message->update($request->all());
+            return response()->json(['message' => 'New Message is updated successfully!']);
 
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
