@@ -43,22 +43,11 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::middleware(['admin'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    })->middleware('auth:sanctum');
-});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return new UserResource($request->user());
 });
 
-// list all user in system 
-Route::middleware([CheckAdminRole::class])->group(function () {
-    Route::get('/users', function () {
-        return User::query()->get();
-    });
-});
 // list single user in system
 Route::get('/user/{id}', function ($id) {
     $user = User::query()->find($id);
